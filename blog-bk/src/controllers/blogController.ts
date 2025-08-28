@@ -3,9 +3,11 @@ import { BlogService } from "../services/blogService";
 
 export const createBlog = async (req: Request, res: Response) => {
   try {
-    const { title, content, authorId } = req.body;
+    const { title, content } = req.body;
     const imageUrl = req.file ? req.file.path : undefined;
-    const blog = await BlogService.createBlog({ title, content, authorId, imageUrl });
+    const userId = (req as any).userId; // from JWT middleware
+    if (!userId) return res.status(401).json({ error: "Unauthorized" });
+    const blog = await BlogService.createBlog({ title, content, imageUrl, userId });
     res.status(201).json(blog);
   } catch (err: any) {
     res.status(500).json({ error: err.message });
