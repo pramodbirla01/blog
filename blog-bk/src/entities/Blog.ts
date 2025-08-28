@@ -1,8 +1,9 @@
-import { PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Entity,ManyToOne, OneToMany  } from "typeorm";
+import { PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Entity, ManyToOne, OneToMany  } from "typeorm";
 import { User } from "./User";
 import { Comment } from "./Comments";
-Entity('blogs')
-export class Blog{
+
+@Entity('blogs')
+export class Blog {
     @PrimaryGeneratedColumn("uuid")
     id!:string
 
@@ -18,7 +19,7 @@ export class Blog{
     @ManyToOne(()=> User,(user)=>user.blogs,{onDelete:"CASCADE"})
     author!: User;
 
-    @OneToMany(()=>Comment, (comment)=>comment.blog, {cascade:true})
+    @OneToMany(() => Comment, (comment) => comment.blog, { cascade: true })
     comments!: Comment[];
 
     @CreateDateColumn()
