@@ -24,7 +24,7 @@ const BlogDetailPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-br from-blue-500 via-pink-400 to-purple-500 py-12 px-2">
+    <div className="min-h-screen flex flex-col items-center   py-12 px-2">
       <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-2xl flex flex-col gap-4">
         <img src={dummyBlog.image} alt={dummyBlog.title} className="w-full h-64 object-cover rounded" />
         <h2 className="text-3xl font-bold mb-2">{dummyBlog.title}</h2>
