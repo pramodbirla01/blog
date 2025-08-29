@@ -1,6 +1,7 @@
 
 import React, { useRef } from "react";
 import OtpInput from "./OtpInput";
+import Loader from "./Loader";
 
 interface OtpFormProps {
 	onOtpSubmit: (otp: string) => void;
@@ -46,13 +47,19 @@ const OtpForm: React.FC<OtpFormProps> = ({ onOtpSubmit, loading }) => {
 					/>
 				))}
 			</div>
-			<button
-				type="submit"
-				className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition w-full"
-				disabled={loading}
-			>
-				{loading ? "Verifying..." : "Verify OTP"}
-			</button>
+						<button
+							type="submit"
+							className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition w-full flex items-center justify-center"
+							disabled={loading}
+						>
+							{loading ? (
+								<>
+									<Loader size={20} className="mr-2" /> Verifying...
+								</>
+							) : (
+								'Verify OTP'
+							)}
+						</button>
 		</form>
 	);
 };

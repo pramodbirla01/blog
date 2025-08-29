@@ -1,12 +1,15 @@
 
 import React, { useState } from "react";
 
+import Loader from "./Loader";
+
 interface LoginFormProps {
 	onEmailPasswordSubmit?: (email: string, password: string) => void;
 	onShowOtp?: () => void;
 	otpMode?: boolean;
 	onEmailOtpSubmit?: (email: string) => void;
 	onBackToPassword?: () => void;
+	loading?: boolean;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -14,7 +17,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
 	onShowOtp,
 	otpMode = false,
 	onEmailOtpSubmit,
-	onBackToPassword
+	onBackToPassword,
+	loading = false,
 }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -37,18 +41,27 @@ const LoginForm: React.FC<LoginFormProps> = ({
 						value={email}
 						onChange={e => setEmail(e.target.value)}
 						required
+						disabled={loading}
 					/>
 				</div>
 				<button
 					type="submit"
-					className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition font-semibold text-lg"
+					className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition font-semibold text-lg flex items-center justify-center"
+					disabled={loading}
 				>
-					Send OTP
+					{loading ? (
+						<>
+							<Loader size={20} className="mr-2" /> Sending email...
+						</>
+					) : (
+						'Send OTP'
+					)}
 				</button>
 				<button
 					type="button"
 					className="text-blue-600 underline mt-2"
 					onClick={onBackToPassword}
+					disabled={loading}
 				>
 					Back to password login
 				</button>
@@ -73,6 +86,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 					value={email}
 					onChange={e => setEmail(e.target.value)}
 					required
+					disabled={loading}
 				/>
 			</div>
 			<div>
@@ -84,13 +98,21 @@ const LoginForm: React.FC<LoginFormProps> = ({
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 					required
+					disabled={loading}
 				/>
 			</div>
 			<button
 				type="submit"
-				className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition font-semibold text-lg"
+				className="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700 transition font-semibold text-lg flex items-center justify-center"
+				disabled={loading}
 			>
-				Login
+				{loading ? (
+					<>
+						<Loader size={20} className="mr-2" /> Loading...
+					</>
+				) : (
+					'Login'
+				)}
 			</button>
 			<div className="flex items-center my-2">
 				<div className="flex-grow border-t border-gray-300"></div>
@@ -101,6 +123,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 				type="button"
 				className="bg-gray-100 text-blue-600 rounded px-4 py-2 hover:bg-blue-100 transition font-semibold text-lg"
 				onClick={onShowOtp}
+				disabled={loading}
 			>
 				Login with OTP
 			</button>

@@ -69,6 +69,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
             </div>
             {tab === "login" && step === "form" && !showOtpLogin && (
               <LoginForm
+                loading={loading}
                 onEmailPasswordSubmit={async (email: string, password: string) => {
                   setLoading(true);
                   setError(null);
@@ -89,6 +90,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
             {tab === "login" && step === "form" && showOtpLogin && (
               <LoginForm
                 otpMode
+                loading={loading}
                 onEmailOtpSubmit={async (email: string) => {
                   setLoading(true);
                   setError(null);
@@ -107,6 +109,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
             )}
             {tab === "register" && step === "form" && (
               <RegisterForm
+                loading={loading}
                 onRegisterSubmit={async (name: string, email: string, password: string) => {
                   setLoading(true);
                   setError(null);
@@ -144,7 +147,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
           </>
         )}
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-        {loading && <div className="text-center text-gray-500 mb-4">Loading...</div>}
+  {/* Loading text moved to buttons */}
       </div>
     </div>
   );

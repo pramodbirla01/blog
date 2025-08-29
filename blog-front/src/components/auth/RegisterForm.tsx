@@ -1,11 +1,13 @@
 
 import React, { useState } from "react";
+import Loader from "./Loader";
 
-interface RegisterFormProps {
-	onRegisterSubmit: (name: string, email: string, password: string) => void;
+	interface RegisterFormProps {
+		onRegisterSubmit: (name: string, email: string, password: string) => void;
+		loading?: boolean; // This line is retained as it is already part of the interface
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = ({ onRegisterSubmit }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onRegisterSubmit, loading = false }) => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -26,6 +28,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegisterSubmit }) => {
 					value={name}
 					onChange={e => setName(e.target.value)}
 					required
+					disabled={loading}
 				/>
 			</div>
 			<div>
@@ -37,6 +40,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegisterSubmit }) => {
 					value={email}
 					onChange={e => setEmail(e.target.value)}
 					required
+					disabled={loading}
 				/>
 			</div>
 			<div>
@@ -48,13 +52,21 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onRegisterSubmit }) => {
 					value={password}
 					onChange={e => setPassword(e.target.value)}
 					required
+					disabled={loading}
 				/>
 			</div>
 			<button
 				type="submit"
-				className="bg-green-600 text-white rounded px-4 py-2 hover:bg-green-700 transition font-semibold text-lg"
+				className="bg-green-600 text-white rounded px-4 py-2 hover:bg-green-700 transition font-semibold text-lg flex items-center justify-center"
+				disabled={loading}
 			>
-				Register
+				{loading ? (
+					<>
+						<Loader size={20} className="mr-2" /> Loading...
+					</>
+				) : (
+					'Register'
+				)}
 			</button>
 		</form>
 	);
