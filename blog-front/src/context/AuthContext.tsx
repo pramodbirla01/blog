@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { getMe } from "@/api/auth/me";
 
 interface User {
+  id: string;
   name: string;
   email: string;
 }
@@ -24,7 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const checkAuth = async () => {
     try {
       const data = await getMe();
-      setUser({ name: data.name, email: data.email });
+  setUser({ id: data.id, name: data.name, email: data.email });
       setIsLoggedIn(true);
     } catch {
       setUser(null);

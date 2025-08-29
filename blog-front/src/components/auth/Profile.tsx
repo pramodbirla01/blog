@@ -1,20 +1,19 @@
 import React from "react";
 import toast from "react-hot-toast";
-
+import Link from "next/link";
 interface ProfileProps {
   name: string;
   email: string;
   onLogout: () => void;
 }
 
-
-import Link from "next/link";
-
 const Profile: React.FC<ProfileProps> = ({ name, email, onLogout }) => {
   return (
     <div className="p-6 text-center relative">
       <Link href="/blog/add">
-        <button className="absolute top-4 right-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm">Add Blog</button>
+        <button className="absolute top-4 right-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm">
+          Add Blog
+        </button>
       </Link>
       <div className="w-16 h-16 mx-auto rounded-full bg-gray-200 flex items-center justify-center text-3xl mb-2">
         👤
