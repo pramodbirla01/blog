@@ -26,4 +26,12 @@ export const BlogService = {
       relations: ["author", "comments", "comments.user"]
     });
   },
+
+  async getBlogById(id: string) {
+    const blogRepo = AppDataSource.getRepository(Blog);
+    return await blogRepo.findOne({
+      where: { id },
+      relations: ["author", "comments", "comments.user"]
+    });
+  },
 };

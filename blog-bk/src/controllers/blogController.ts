@@ -1,5 +1,17 @@
 import { Request, Response } from "express";
+
 import { BlogService } from "../services/blogService";
+
+export const getBlogById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const blog = await BlogService.getBlogById(id);
+    if (!blog) return res.status(404).json({ error: "Blog not found" });
+    res.json(blog);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
 export const createBlog = async (req: Request, res: Response) => {
   try {
