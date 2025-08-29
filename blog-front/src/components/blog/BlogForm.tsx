@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 
 import { createBlog } from '@/api/blog/add';
+import toast from 'react-hot-toast';
+import Loader from '../auth/Loader';
 import { useRouter } from 'next/navigation';
 
 const BlogForm: React.FC = () => {
@@ -25,18 +27,22 @@ const BlogForm: React.FC = () => {
 		}
 	};
 
-		const handleSubmit = async (e: React.FormEvent) => {
-			e.preventDefault();
-			setLoading(true);
-			try {
-				await createBlog({ title, content, imageFile });
-				router.push('/');
-			} catch (err: any) {
-				// Optionally handle error
-			} finally {
-				setLoading(false);
-			}
-		};
+			const handleSubmit = async (e: React.FormEvent) => {
+				e.preventDefault();
+				setLoading(true);
+				try {
+					await createBlog({ title, content, imageFile });
+					toast.success('Blog created!');
+					router.push('/');
+				} catch (err: any) {
+					let msg = 'Failed to create blog';
+					if (err?.response?.data?.error) msg = err.response.data.error;
+					else if (typeof err?.message === 'string') msg = err.message;
+					toast.error(msg);
+				} finally {
+					setLoading(false);
+				}
+			};
 
 	return (
 		<form onSubmit={handleSubmit} className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md flex flex-col gap-4 mt-8">
@@ -71,9 +77,9 @@ const BlogForm: React.FC = () => {
 					<img src={imagePreview} alt="Preview" className="mt-2 rounded max-h-40 object-contain border" />
 				)}
 			</div>
-			<button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" disabled={loading}>
-				{loading ? 'Creating...' : 'Create Blog'}
-			</button>
+					<button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition flex items-center justify-center gap-2" disabled={loading}>
+						{loading && <Loader size={18} className="mr-2" />} {loading ? 'Creating...' : 'Create Blog'}
+					</button>
 		</form>
 	);
 };
