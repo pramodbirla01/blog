@@ -7,6 +7,7 @@ import RegisterForm from "./RegisterForm";
 import OtpForm from "./OtpForm";
 import Profile from "./Profile";
 import { useAuth } from "@/context/AuthContext";
+import toast from "react-hot-toast";
 
 interface AuthContentProps {
   open: boolean;
@@ -79,6 +80,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
                     setIsLoggedIn(true);
                     setLoading(false);
                     onClose();
+                    toast.success("Logged in successfully");
                   } catch (err: any) {
                     setError(err?.response?.data?.error || "Login failed");
                     setLoading(false);
@@ -99,6 +101,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
                     setEmail(email);
                     setStep("otp");
                     setLoading(false);
+                    toast.success("OTP sent to your email");
                   } catch (err: any) {
                     setError(err?.response?.data?.error || "Failed to send OTP");
                     setLoading(false);
@@ -118,6 +121,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
                     setUser(res.user);
                     setIsLoggedIn(true);
                     setLoading(false);
+                    toast.success("Registered and logged in successfully");
                   } catch (err: any) {
                     setError(err?.response?.data?.error || "Registration failed");
                     setLoading(false);
@@ -137,6 +141,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
                     setIsLoggedIn(true);
                     setLoading(false);
                     onClose();
+                    toast.success("Logged in successfully");
                   } catch (err: any) {
                     setError(err?.response?.data?.error || "Invalid OTP");
                     setLoading(false);

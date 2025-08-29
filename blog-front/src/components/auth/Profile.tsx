@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 interface ProfileProps {
   name: string;
@@ -14,7 +15,13 @@ const Profile: React.FC<ProfileProps> = ({ name, email, onLogout }) => {
       </div>
       <div className="font-semibold text-lg">{name}</div>
       <div className="text-gray-500 text-sm mb-4">{email}</div>
-      <button className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition" onClick={onLogout}>
+      <button
+        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition"
+        onClick={() => {
+          onLogout();
+          toast.success("Logged out successfully");
+        }}
+      >
         Logout
       </button>
     </div>
