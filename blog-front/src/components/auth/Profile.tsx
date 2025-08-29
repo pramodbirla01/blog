@@ -5,13 +5,17 @@ interface ProfileProps {
   name: string;
   email: string;
   onLogout: () => void;
+  onClose?: () => void;
 }
 
-const Profile: React.FC<ProfileProps> = ({ name, email, onLogout }) => {
+const Profile: React.FC<ProfileProps> = ({ name, email, onLogout, onClose }) => {
   return (
     <div className="p-6 text-center relative">
       <Link href="/blog/add">
-        <button className="absolute top-4 right-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm">
+        <button
+          className="absolute top-4 right-4 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition text-sm"
+          onClick={onClose}
+        >
           Add Blog
         </button>
       </Link>

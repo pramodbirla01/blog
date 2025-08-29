@@ -34,7 +34,7 @@ const Nav: React.FC = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between px-6 py-4 bg-white shadow">
+    <nav className="flex items-center justify-between px-6 py-4 border-b border-amber-200 shadow">
       <span
         className="font-extrabold text-2xl cursor-pointer select-none"
         onClick={() => router.push("/")}
@@ -67,7 +67,7 @@ const Nav: React.FC = () => {
             >
               &times;
             </button>
-            <Profile name={user.name} email={user.email} onLogout={handleLogout} />
+            <Profile name={user.name} email={user.email} onLogout={handleLogout} onClose={() => setShowProfile(false)} />
           </div>
         </div>
       )}

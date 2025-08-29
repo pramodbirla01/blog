@@ -19,15 +19,14 @@ const BlogDetailPage = async ({ params }: BlogDetailPageProps) => {
   if (!blog) return <div className="p-8 text-center">Blog not found.</div>;
 
   return (
-    <div className="mx-auto bg-white rounded-lg shadow-md p-0 overflow-hidden max-w-3xl">
+    <div className=" bg-white  shadow-md p-0 overflow-hidden ">
       {blog.imageUrl && (
-        <div className="w-full h-90 relative">
+        <div className="w-full h-80  relative ">
           <Image
             src={blog.imageUrl}
             alt={blog.title}
             fill
-            className="object-cover w-full h-full"
-            sizes="100vw"
+            className="object-contain w-full h-full "
             priority
           />
         </div>

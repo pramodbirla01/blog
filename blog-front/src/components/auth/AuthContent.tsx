@@ -50,6 +50,7 @@ const AuthContent: React.FC<AuthContentProps> = ({ open, onClose, onLogout }) =>
               setIsLoggedIn(false);
               setUser(null);
             }}
+            onClose={onClose}
           />
         )}
         {!isLoggedIn && (

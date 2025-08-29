@@ -15,7 +15,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     }
   }
   if (!token) {
-    return res.status(401).json({ error: "No token provided" });
+    return res.status(401).json({ error: "Login required" });
   }
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
